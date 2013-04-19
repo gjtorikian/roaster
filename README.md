@@ -1,6 +1,6 @@
 Asynchronously convert a Markdown file into HTML. WOW!
 
-
+You can specify either the contents of a file, or, the path to a file to read.
 ## Usage
 
 ```javascript
@@ -13,6 +13,11 @@ roaster("./markdown.md", options, function(err, contents) {
 	fs.writeFileSync("./markdown.html", contents, "utf8");
 });
 ```
+
+## Options
+
+* All options are passed to `marked` for rendering
+* If you pass `options.isFile`, the first parameter is assumed to be a file path
 
 ## Libraries used
 

@@ -2,6 +2,9 @@ require('coffee-script');
 var roaster = require("../src/roaster");
 var fs = require("fs");
 
-roaster("./markdown.md", {}, function(err, contents) {
-	fs.writeFileSync("./markdown.html", contents, "utf8");
+var options = {};
+options.isFile = true;
+
+roaster("./markdown.md", options, function(err, contents) {
+    fs.writeFileSync("./markdown.html", contents, "utf8");
 });
