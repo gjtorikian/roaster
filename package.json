@@ -1,0 +1,24 @@
+{
+  "name": "roaster",
+  "description": "Turns a raw and crunchy Markdown file into nice and smooth output",
+  "author": "Garen J. Torikian",
+  "version": "0.0.1",
+  "main": "src/roaster.coffee",
+  "preferGlobal": false,
+  "repository": "git://github.com/gjtorikian/roaster.git",
+  "homepage": "https://github.com/gjtorikian/roaster",
+  "bugs": { "url": "http://github.com/gjtorikian/roaster/issues" },
+
+  "dependencies"    : {
+                        "marked" : "",
+                        "emoji-images" : ""
+                      },
+  "devDependencies": {
+    "coffee-script": ">= 1.3"
+  },
+  "scripts": {
+    "prepublish":   "./scripts/build"
+  },
+
+  "engines"         : { "node" : ">= 0.8.0" }
+}
