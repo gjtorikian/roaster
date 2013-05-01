@@ -35,3 +35,6 @@ __Marked is now faster than Discount, which is written in C.__
 :shipit:
 
 :smiley:
+
+- [ ] *un*check
+- [x] _chec_k
