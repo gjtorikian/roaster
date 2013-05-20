@@ -16,8 +16,10 @@ roaster("./markdown.md", options, function(err, contents) {
 
 ## Options
 
-* All options are passed to `marked` for rendering
-* If you pass `options.isFile`, the first parameter is assumed to be a file path
+All options are passed to `marked` for rendering.
+
+If you pass `options.isFile`, the first parameter is assumed to be a file path.
+This is the default action.
 
 ## Libraries used
 
