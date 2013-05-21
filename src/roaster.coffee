@@ -28,7 +28,7 @@ module.exports = (file, opts, callback) ->
 
     if options.isFile
         Fs.readFile(file, "utf8", (err, data) =>
-            callback(null, conversion(data))
+            callback(err, conversion(data))
         )
     else
         callback(null, conversion(file))
