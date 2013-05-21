@@ -11,13 +11,19 @@ emojiFolder = Path.dirname( require.resolve('emoji-images') ) + "/pngs"
 defaultOptions =
   isFile: true
 
-module.exports = (file, options, callback) ->
+module.exports = (file, opts, callback) ->
     conversion = (data) ->
         emojified = emoji(data, emojiFolder, 20)
         mdToHtml = marked(emojified)
         contents = taskLists(mdToHtml)
 
-    [options, callback] = [defaultOptions, options] if typeof options is 'function'
+    options = {}
+    if typeof opts is 'function'
+      [options, callback] = [defaultOptions, opts]
+    else
+      for key of opts
+        options[key] = opts[key]
+
     marked.setOptions(options)
 
     if options.isFile
