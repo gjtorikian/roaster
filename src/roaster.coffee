@@ -9,7 +9,7 @@ taskLists = require 'task-lists'
 emojiFolder = Path.dirname( require.resolve('emoji-images') ) + "/pngs"
 
 defaultOptions =
-  isFile: true
+  isFile: false
 
 module.exports = (file, opts, callback) ->
     conversion = (data) ->
