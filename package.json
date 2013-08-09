@@ -10,7 +10,7 @@
   "bugs": { "url": "http://github.com/gjtorikian/roaster/issues" },
 
   "dependencies"    : {
-                        "marked" : "0.2.8",
+                        "marked" : "0.2.9",
                         "emoji-images" : "0.0.2",
                         "task-lists": "0.0.2"
                       },
