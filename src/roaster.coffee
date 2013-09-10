@@ -14,6 +14,7 @@ defaultOptions =
 module.exports = (file, opts, callback) ->
     conversion = (data) ->
         emojified = emoji(data, emojiFolder, 20)
+        emojified = emojified.replace(/\\</g, "&lt;")
         mdToHtml = marked(emojified)
         contents = taskLists(mdToHtml)
 

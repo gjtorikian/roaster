@@ -1,5 +1,6 @@
 # marked
 
+
 A full-featured markdown parser and compiler, written in javascript.
 Built for speed.
 
@@ -38,3 +39,6 @@ __Marked is now faster than Discount, which is written in C.__
 
 - [ ] *un*check
 - [x] _chec_k
+
+
+\<hunks\> \<options\>, \<grid width\>, \<grid offset\>
