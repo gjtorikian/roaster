@@ -18,10 +18,17 @@
                       },
 
   "devDependencies": {
-    "coffee-script": ">= 1.3"
+    "coffee-script": "~1.6.1",
+    "grunt": "~0.4.0",
+    "grunt-contrib-coffee": "~0.4.0",
+    "grunt-shell": "~0.2.1",
+    "grunt-cli": "~0.1.6",
+    "jasmine-focused": "~0.15.0",
+    "grunt-coffeelint": "0.0.6"
   },
   "scripts": {
-    "prepublish":   "./scripts/build"
+    "prepublish": "grunt coffee lint",
+    "test": "grunt test"
   },
 
   "engines"         : { "node" : ">= 0.8.0" }
