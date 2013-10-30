@@ -13,8 +13,10 @@
   "dependencies"    : {
                         "marked" : "0.2.9",
                         "emoji-images" : "0.0.2",
-                        "task-lists": "0.0.2"
+                        "task-lists": "0.0.2",
+                        "toc": "0.3.0"
                       },
+
   "devDependencies": {
     "coffee-script": ">= 1.3"
   },
