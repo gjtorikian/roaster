@@ -8,6 +8,7 @@
   "repository": "git://github.com/gjtorikian/roaster.git",
   "homepage": "https://github.com/gjtorikian/roaster",
   "bugs": { "url": "http://github.com/gjtorikian/roaster/issues" },
+  "license" : "MIT",
 
   "dependencies"    : {
                         "marked" : "0.2.9",
