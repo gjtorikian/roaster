@@ -9,11 +9,12 @@ toc = require 'toc'
 
 emojiFolder = Path.join(Path.dirname( require.resolve('emoji-images') ), "pngs")
 
-options =
-  isFile: false
-  header: '<h<%= level %>><a name="<%= anchor %>" class="anchor" href="#<%= anchor %>"><span class="octicon octicon-link"></span></a><%= header %></h<%= level %>>'
-
 module.exports = (file, opts, callback) ->
+  options =
+    isFile: false
+    header: '<h<%= level %>><a name="<%= anchor %>" class="anchor" href="#<%= anchor %>"><span class="octicon octicon-link"></span></a><%= header %></h<%= level %>>'
+    anchorMin: 1
+
   conversion = (data) ->
     emojified = emoji(data, emojiFolder, 20).replace(/\\</g, "&lt;")
     mdToHtml = marked(emojified)
@@ -30,6 +31,9 @@ module.exports = (file, opts, callback) ->
 
   if options.isFile
     Fs.readFile file, "utf8", (err, data) =>
-      callback(err, conversion(data))
+      if err
+        callback(err, null)
+      else
+        callback(null, conversion(data))
   else
     callback(null, conversion(file))
