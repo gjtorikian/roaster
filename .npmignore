@@ -1,0 +1,7 @@
+/test
+*.coffee
+*.log
+*~
+.travis.yml
+.npmignore
+/src/*.coffee
