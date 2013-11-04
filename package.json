@@ -2,7 +2,7 @@
   "name": "roaster",
   "description": "Turns a raw and crunchy Markdown file into nice and smooth output",
   "author": "Garen J. Torikian",
-  "version": "0.0.8",
+  "version": "0.1.0",
   "main": "lib/roaster.js",
   "preferGlobal": false,
   "repository": "git://github.com/gjtorikian/roaster.git",
