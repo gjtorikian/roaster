@@ -5,7 +5,6 @@ Path = require 'path'
 marked = require 'marked'
 emoji = require 'emoji-images'
 taskLists = require 'task-lists'
-toc = require 'toc'
 
 emojiFolder = Path.join(Path.dirname( require.resolve('emoji-images') ), "pngs")
 
@@ -19,7 +18,6 @@ module.exports = (file, opts, callback) ->
     emojified = emoji(data, emojiFolder, 20).replace(/\\</g, "&lt;")
     mdToHtml = marked(emojified)
     contents = taskLists(mdToHtml)
-    contents = toc.process(contents, options)
 
   if typeof opts is 'function'
     callback = opts
