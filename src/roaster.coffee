@@ -15,9 +15,9 @@ module.exports = (file, opts, callback) ->
     anchorMin: 1
 
   conversion = (data) ->
-    emojified = emoji(data, emojiFolder, 20).replace(/\\</g, "&lt;")
-    mdToHtml = marked(emojified)
-    contents = taskLists(mdToHtml)
+    mdToHtml = marked(data)
+    emojified = emoji(mdToHtml, emojiFolder, 20).replace(/\\</g, "&lt;")
+    contents = taskLists(emojified)
 
   if typeof opts is 'function'
     callback = opts

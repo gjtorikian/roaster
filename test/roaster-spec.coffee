@@ -24,25 +24,29 @@ describe "roaster", ->
       roaster Path.join(fixtures_dir, "emoji.md"), {isFile: true}, (err, contents) ->
         expect(err).toBeNull()
         expect(contents).toMatch '<p><img class="emoji" title=":trollface:" alt="trollface" src="/Users/garentorikian/Development/roaster/node_modules/emoji-images/pngs/trollface.png" height="20"></p>\n<p><img class="emoji" title=":shipit:" alt="shipit" src="/Users/garentorikian/Development/roaster/node_modules/emoji-images/pngs/shipit.png" height="20"></p>\n<p><img class="emoji" title=":smiley:" alt="smiley" src="/Users/garentorikian/Development/roaster/node_modules/emoji-images/pngs/smiley.png" height="20"></p>'
+    it "can sanitize and return", ->
+      roaster Path.join(fixtures_dir, "emoji.md"), {isFile: true, sanitize:true}, (err, contents) ->
+        expect(err).toBeNull()
+        expect(contents).toMatch '<p><img class="emoji" title=":trollface:" alt="trollface" src="/Users/garentorikian/Development/roaster/node_modules/emoji-images/pngs/trollface.png" height="20"></p>\n<p><img class="emoji" title=":shipit:" alt="shipit" src="/Users/garentorikian/Development/roaster/node_modules/emoji-images/pngs/shipit.png" height="20"></p>\n<p><img class="emoji" title=":smiley:" alt="smiley" src="/Users/garentorikian/Development/roaster/node_modules/emoji-images/pngs/smiley.png" height="20"></p>'
     it "does nothing to unknown emoji", ->
       roaster ":lala:", (err, contents) ->
         expect(err).toBeNull()
         expect(contents).toMatch ':lala:'
 
-  describe "headers", ->
-    [toc, result, resultShort] = []
+  # describe "headers", ->
+  #   [toc, result, resultShort] = []
 
-    beforeEach ->
-      toc = Fs.readFileSync(Path.join(fixtures_dir, "toc.md"), {encoding: "utf8"})
-      result = Fs.readFileSync(Path.join(fixtures_dir, "toc_normal_result.html"), {encoding: "utf8"})
-      resultShort = Fs.readFileSync(Path.join(fixtures_dir, "toc_short_result.html"), {encoding: "utf8"})
+  #   beforeEach ->
+  #     toc = Fs.readFileSync(Path.join(fixtures_dir, "toc.md"), {encoding: "utf8"})
+  #     result = Fs.readFileSync(Path.join(fixtures_dir, "toc_normal_result.html"), {encoding: "utf8"})
+  #     resultShort = Fs.readFileSync(Path.join(fixtures_dir, "toc_short_result.html"), {encoding: "utf8"})
 
-    it "adds anchors to all headings", ->
-      roaster toc, (err, contents) ->
-        expect(err).toBeNull()
-        expect(contents.replace(/^\s+|\s+$/g, '')).toContain result.replace(/\s+$/g, '')
+  #   it "adds anchors to all headings", ->
+  #     roaster toc, (err, contents) ->
+  #       expect(err).toBeNull()
+  #       expect(contents.replace(/^\s+|\s+$/g, '')).toContain result.replace(/\s+$/g, '')
 
-    it "truncates anchors on headings, due to options", ->
-      roaster toc, {anchorMin: 3, anchorMax: 4}, (err, contents) ->
-        expect(err).toBeNull()
-        expect(contents.replace(/^\s+|\s+$/g, '')).toContain resultShort.replace(/\s+$/g, '')
+  #   it "truncates anchors on headings, due to options", ->
+  #     roaster toc, {anchorMin: 3, anchorMax: 4}, (err, contents) ->
+  #       expect(err).toBeNull()
+  #       expect(contents.replace(/^\s+|\s+$/g, '')).toContain resultShort.replace(/\s+$/g, '')
