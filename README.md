@@ -27,3 +27,4 @@ actual string of Markdown.
 
 * [marked](https://github.com/chjj/marked) for Markdown conversion
 * [emoji-images](https://github.com/henrikjoreteg/emoji-images.js) for emoji conversion
+* [task-lists](https://github.com/gjtorikian/task-lists-js) for GFM style task lists conversion
