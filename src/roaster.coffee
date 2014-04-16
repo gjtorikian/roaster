@@ -16,7 +16,7 @@ module.exports = (file, opts, callback) ->
 
   conversion = (data) ->
     mdToHtml = marked(data)
-    emojified = emoji(mdToHtml, emojiFolder, 20).replace(/\\</g, "&lt;")
+    emojified = emoji(mdToHtml, emojiFolder, 20)
     contents = taskLists(emojified)
 
   if typeof opts is 'function'
