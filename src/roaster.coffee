@@ -5,11 +5,12 @@ Path = require 'path'
 marked = require 'marked'
 emoji = require 'emoji-images'
 taskLists = require 'task-lists'
+toc = require 'toc'
 
 emojiFolder = Path.join(Path.dirname( require.resolve('emoji-images') ), "pngs")
 
 module.exports = (file, opts, callback) ->
-  options =
+  @options =
     isFile: false
     header: '<h<%= level %>><a name="<%= anchor %>" class="anchor" href="#<%= anchor %>"><span class="octicon octicon-link"></span></a><%= header %></h<%= level %>>'
     anchorMin: 1
@@ -18,14 +19,15 @@ module.exports = (file, opts, callback) ->
     mdToHtml = marked(data)
     emojified = emoji(mdToHtml, emojiFolder, 20)
     contents = taskLists(emojified)
+    contents = toc.process(contents, @options)
 
   if typeof opts is 'function'
     callback = opts
   else
     for key of opts
-      options[key] = opts[key]
+      @options[key] = opts[key]
 
-  marked.setOptions(options)
+  marked.setOptions(@options)
 
   if options.isFile
     Fs.readFile file, "utf8", (err, data) =>
