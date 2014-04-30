@@ -5,6 +5,7 @@ Path = require 'path'
 marked = require 'marked'
 emoji = require 'emoji-images'
 taskLists = require 'task-lists'
+cheerio = require 'cheerio'
 
 emojiFolder = Path.join(Path.dirname( require.resolve('emoji-images') ), "pngs")
 
@@ -17,7 +18,15 @@ module.exports = (file, opts, callback) ->
   conversion = (data) ->
     mdToHtml = marked(data)
     emojified = emoji(mdToHtml, emojiFolder, 20)
-    contents = taskLists(emojified)
+
+    # emoji-images is too aggressive; let's replace images in monospace tags with the actual emoji text
+    $ = cheerio.load(emojified)
+    $('pre img').each (index, element) ->
+      $('pre img').replaceWith $(this).attr('title')
+    $('code img').each (index, element) ->
+      $('code img').replaceWith $(this).attr('title')
+
+    contents = taskLists($.html())
 
   if typeof opts is 'function'
     callback = opts
