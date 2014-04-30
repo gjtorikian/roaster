@@ -17,6 +17,7 @@
                       },
 
   "devDependencies": {
+    "cheerio": "0.15.0",
     "coffee-script": "~1.6.1",
     "grunt": "~0.4.0",
     "grunt-contrib-coffee": "~0.4.0",
