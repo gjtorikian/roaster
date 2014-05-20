@@ -1,6 +1,7 @@
 roaster = require '../lib/roaster'
 Path = require 'path'
 Fs = require 'fs'
+cheerio = require 'cheerio'
 
 fixtures_dir = Path.join(__dirname, "fixtures")
 
@@ -9,7 +10,14 @@ describe "roaster", ->
   describe "options", ->
     describe "passing options.isFile = true", ->
       it "returns a rendered file", ->
-        roaster Path.join(fixtures_dir, "markdown.md"), {isFile: true}, (err, contents) ->
+        callback = jasmine.createSpy()
+        roaster Path.join(fixtures_dir, "markdown.md"), {isFile: true}, callback
+
+        waitsFor ->
+          callback.callCount > 0
+
+        runs ->
+          [err, contents] = callback.mostRecentCall.args
           expect(err).toBeNull()
           expect(contents).toContain '<code class="lang-bash">'
     describe "not passing options.isFile", ->
@@ -21,22 +29,77 @@ describe "roaster", ->
 
   describe "emoji", ->
     it "returns emoji it knows", ->
-      roaster Path.join(fixtures_dir, "emoji.md"), {isFile: true}, (err, contents) ->
+      callback = jasmine.createSpy()
+      roaster Path.join(fixtures_dir, "emoji.md"), {isFile: true}, callback
+
+      waitsFor ->
+        callback.callCount > 0
+
+      runs ->
+        [err, contents] = callback.mostRecentCall.args
         expect(err).toBeNull()
-        expect(contents).toEqual '<p><img class="emoji" title=":trollface:" alt="trollface" src="/Users/garentorikian/Development/roaster/node_modules/emoji-images/pngs/trollface.png" height="20"></p>\n<p><img class="emoji" title=":shipit:" alt="shipit" src="/Users/garentorikian/Development/roaster/node_modules/emoji-images/pngs/shipit.png" height="20"></p>\n<p><img class="emoji" title=":smiley:" alt="smiley" src="/Users/garentorikian/Development/roaster/node_modules/emoji-images/pngs/smiley.png" height="20"></p>'
+
+        $ = cheerio.load(contents)
+        expect($("p img").length).toBe 3
+
+        expect($('p img[title=":trollface:"]').length).toBe 1
+        expect($('p img[title=":trollface:"]').attr("class")).toEqual "emoji"
+        expect($('p img[title=":trollface:"]').attr("alt")).toEqual "trollface"
+        expect($('p img[title=":trollface:"]').attr("src")).toMatch /.*trollface\.png$/
+
+        expect($('p img[title=":shipit:"]').length).toBe 1
+        expect($('p img[title=":shipit:"]').attr("class")).toEqual "emoji"
+        expect($('p img[title=":shipit:"]').attr("alt")).toEqual "shipit"
+        expect($('p img[title=":shipit:"]').attr("src")).toMatch /.*shipit\.png$/
+
+        expect($('p img[title=":smiley:"]').length).toBe 1
+        expect($('p img[title=":smiley:"]').attr("class")).toEqual "emoji"
+        expect($('p img[title=":smiley:"]').attr("alt")).toEqual "smiley"
+        expect($('p img[title=":smiley:"]').attr("src")).toMatch /.*smiley\.png$/
     it "can sanitize and return", ->
-      roaster Path.join(fixtures_dir, "emoji.md"), {isFile: true, sanitize:true}, (err, contents) ->
+      callback = jasmine.createSpy()
+      roaster Path.join(fixtures_dir, "emoji.md"), {isFile: true, sanitize:true}, callback
+
+      waitsFor ->
+        callback.callCount > 0
+
+      runs ->
+        [err, contents] = callback.mostRecentCall.args
         expect(err).toBeNull()
-        expect(contents).toEqual '<p><img class="emoji" title=":trollface:" alt="trollface" src="/Users/garentorikian/Development/roaster/node_modules/emoji-images/pngs/trollface.png" height="20"></p>\n<p><img class="emoji" title=":shipit:" alt="shipit" src="/Users/garentorikian/Development/roaster/node_modules/emoji-images/pngs/shipit.png" height="20"></p>\n<p><img class="emoji" title=":smiley:" alt="smiley" src="/Users/garentorikian/Development/roaster/node_modules/emoji-images/pngs/smiley.png" height="20"></p>'
+
+        $ = cheerio.load(contents)
+        expect($("p img").length).toBe 3
+
+        expect($('p img[title=":trollface:"]').length).toBe 1
+        expect($('p img[title=":trollface:"]').attr("class")).toEqual "emoji"
+        expect($('p img[title=":trollface:"]').attr("alt")).toEqual "trollface"
+        expect($('p img[title=":trollface:"]').attr("src")).toMatch /.*trollface\.png$/
+
+        expect($('p img[title=":shipit:"]').length).toBe 1
+        expect($('p img[title=":shipit:"]').attr("class")).toEqual "emoji"
+        expect($('p img[title=":shipit:"]').attr("alt")).toEqual "shipit"
+        expect($('p img[title=":shipit:"]').attr("src")).toMatch /.*shipit\.png$/
+
+        expect($('p img[title=":smiley:"]').length).toBe 1
+        expect($('p img[title=":smiley:"]').attr("class")).toEqual "emoji"
+        expect($('p img[title=":smiley:"]').attr("alt")).toEqual "smiley"
+        expect($('p img[title=":smiley:"]').attr("src")).toMatch /.*smiley\.png$/
     it "does nothing to unknown emoji", ->
       roaster ":lala:", (err, contents) ->
         expect(err).toBeNull()
         expect(contents).toEqual '<p>:lala:</p>\n'
     it "does not mess up coded emoji", ->
-      roaster Path.join(fixtures_dir, "emoji_bad.md"), {isFile: true}, (err, contents) ->
-        expect(err).toBeNull()
-        expect(contents).toEqual '<pre><code class="lang-ruby">not :trollface:\n</code></pre>\n<p>wow <code>that is nice :smiley:</code></p>'
+      callback = jasmine.createSpy()
+      roaster Path.join(fixtures_dir, "emoji_bad.md"), {isFile: true}, callback
 
+      waitsFor ->
+        callback.callCount > 0
+
+      runs ->
+        [err, contents] = callback.mostRecentCall.args
+
+        expect(err).toBeNull()
+        expect(contents).toEqual '<pre><code class="lang-ruby">not :trollface:\n</code></pre>\n<p>wow <code>that is nice :smiley:</code></p>\n'
   # describe "headers", ->
   #   [toc, result, resultShort] = []
 
