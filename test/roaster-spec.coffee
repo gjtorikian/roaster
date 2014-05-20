@@ -99,7 +99,7 @@ describe "roaster", ->
         [err, contents] = callback.mostRecentCall.args
 
         expect(err).toBeNull()
-        expect(contents).toEqual '<pre><code class="lang-ruby">not :trollface:\n</code></pre>\n<p>wow <code>that is nice :smiley:</code></p>\n'
+        expect(contents).toEqual '<pre><code class="lang-ruby">not :trollface:\n</code></pre>\n<p>wow <code>that is nice :smiley:</code></p>\n<p><code>:laughing:</code></p>\n<p><code>:lipstick:</code></p>\n<pre><code>:laughing:\n</code></pre><pre><code>:lipstick:\n</code></pre>'
   # describe "headers", ->
   #   [toc, result, resultShort] = []
 
