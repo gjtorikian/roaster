@@ -22,9 +22,9 @@ module.exports = (file, opts, callback) ->
     # emoji-images is too aggressive; let's replace images in monospace tags with the actual emoji text
     $ = cheerio.load(emojified)
     $('pre img').each (index, element) ->
-      $('pre img').replaceWith $(this).attr('title')
+      $(this).replaceWith $(this).attr('title')
     $('code img').each (index, element) ->
-      $('code img').replaceWith $(this).attr('title')
+      $(this).replaceWith $(this).attr('title')
 
     contents = taskLists($.html())
 
