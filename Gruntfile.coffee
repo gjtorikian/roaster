@@ -19,6 +19,7 @@ module.exports = (grunt) ->
 
       src: ['src/**/*.coffee']
       test: ['test/**/*.coffee']
+      gruntfile: ['Gruntfile.coffee']
 
     shell:
       test:
