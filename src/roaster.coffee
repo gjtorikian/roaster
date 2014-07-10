@@ -16,7 +16,9 @@ module.exports = (file, opts, callback) ->
     anchorMin: 1
 
   conversion = (data) ->
+    # turn MD to HTML
     mdToHtml = marked(data)
+    # turn emoji in HTML to images
     emojified = emoji(mdToHtml, emojiFolder, 20)
 
     # emoji-images is too aggressive; let's replace images in monospace tags with the actual emoji text
@@ -26,6 +28,7 @@ module.exports = (file, opts, callback) ->
     $('code img').each (index, element) ->
       $(this).replaceWith $(this).attr('title')
 
+    # turn - [ ] in HTML to tasklists
     contents = taskLists($.html())
 
   if typeof opts is 'function'
