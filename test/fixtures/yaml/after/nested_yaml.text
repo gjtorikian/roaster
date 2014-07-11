@@ -1,0 +1,97 @@
+<table data-table-type="yaml-metadata">
+  <thead>
+  <tr>
+  <th>layout</th>
+
+  <th>product</th>
+
+  <th>tax</th>
+
+  <th>total</th>
+
+  <th>comments</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><div>post</div></td>
+
+  <td><div><table>
+  <tbody>
+  <tr>
+  <td><div><table>
+  <thead>
+  <tr>
+  <th>sku</th>
+
+  <th>quantity</th>
+
+  <th>description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><div>BL394D</div></td>
+
+  <td><div>4</div></td>
+
+  <td><div>Basketball</div></td>
+  </tr>
+  </tbody>
+</table></div></td>
+
+  <td><div><table>
+  <thead>
+  <tr>
+  <th>sku</th>
+
+  <th>quantity</th>
+
+  <th>description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><div>BL4438H</div></td>
+
+  <td><div>1</div></td>
+
+  <td><div>Baseball</div></td>
+  </tr>
+  </tbody>
+</table></div></td>
+
+  <td><div><table>
+  <thead>
+  <tr>
+  <th>sku</th>
+
+  <th>quantity</th>
+
+  <th>description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><div>BL4138H</div></td>
+
+  <td><div>15</div></td>
+
+  <td><div>Soccer</div></td>
+  </tr>
+  </tbody>
+</table></div></td>
+  </tr>
+  </tbody>
+</table></div></td>
+
+  <td><div>251.42</div></td>
+
+  <td><div>4443.52</div></td>
+
+  <td><div>Late afternoon is best. Backup contact is Nancy Billsmer @ 555-4338.</div></td>
+  </tr>
+  </tbody>
+</table>
+
+<p>Not much to say here, eh?</p>

@@ -23,7 +23,8 @@ module.exports = (content) =>
     elements = if is_array then data else _.values data
 
     _.each elements, (value) ->
-      if _.isArray(value) || _.isObject(value)
+      # TODO: js-yaml messes with dates! 2012-09-11 -> Mon Sep 10 2012 17:00:00 GMT-0700 (PDT). fix upstream?
+      if _.isArray(value) || (_.isObject(value) && !_.isDate(value))
         tb_row.push table_format("TD", process_yaml(value))
       else
         tb_row.push table_format("TD", value)
@@ -49,17 +50,22 @@ module.exports = (content) =>
       when "TD"
         return "\n  <td><div>#{values[0]}</div></td>\n  "
 
-  if items = content.match /^(---\s*\n(.*?\n?)^---\s*$\n?)(.*)/m
-    body = items[3]
+  try
+    if items = content.match /^(-{3}(?:\n|\r)([\w\W]+?)-{3})?([\w\W]*)*/
+      body = items[3]
 
-    data = YAML.safeLoad(items[2])
+      data = YAML.load(items[2])
 
-    # avoids content that's not YAML
-    return [null, content] unless _.isObject(data)
+      # avoids content that's not YAML
+      return [null, content] unless _.isObject(data)
 
-    # the sub adds an id to only the first table element (in case of nested tables)
-    frontmatter = process_yaml(data).replace(/<table/, "<table data-table-type=\"yaml-metadata\"").replace(/^\s*$/gm, '')
+      # the sub adds an id to only the first table element (in case of nested tables)
+      frontmatter = process_yaml(data).replace(/<table/, "<table data-table-type=\"yaml-metadata\"").replace(/^\s*$/gm, '')
+
+      return [frontmatter, body]
+    else
+      return [null, content]
+  catch YAMLException
+    frontmatter = "<pre lang=\"yaml\"><code>\n#{items[1]}</code></pre>"
 
     return [frontmatter, body]
-  else
-    return [null, content]

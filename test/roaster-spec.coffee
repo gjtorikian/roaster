@@ -30,7 +30,7 @@ describe "roaster", ->
           expect(contents).toContain '<code class="lang-bash">'
 
   describe "yaml frontmatter", ->
-    fit "properly converts array_data", ->
+    it "properly converts array_data", ->
       callback = jasmine.createSpy()
       roaster Path.join(YAML_fixtures_before_dir, "array_data.md"), {isFile: true}, callback
 
@@ -41,6 +41,97 @@ describe "roaster", ->
         [err, contents] = callback.mostRecentCall.args
         expect(err).toBeNull()
         after = Fs.readFileSync(Path.join(YAML_fixtures_after_dir, "array_data.text"), 'utf8')
+        expect(contents).toEqual after
+
+    it "properly converts basic_with_markdown", ->
+      callback = jasmine.createSpy()
+      roaster Path.join(YAML_fixtures_before_dir, "basic_with_markdown.md"), {isFile: true}, callback
+
+      waitsFor ->
+        callback.callCount > 0
+
+      runs ->
+        [err, contents] = callback.mostRecentCall.args
+        expect(err).toBeNull()
+        after = Fs.readFileSync(Path.join(YAML_fixtures_after_dir, "basic_with_markdown.text"), 'utf8')
+        expect(contents).toEqual after
+
+    it "properly converts basic", ->
+      callback = jasmine.createSpy()
+      roaster Path.join(YAML_fixtures_before_dir, "basic.md"), {isFile: true}, callback
+
+      waitsFor ->
+        callback.callCount > 0
+
+      runs ->
+        [err, contents] = callback.mostRecentCall.args
+        expect(err).toBeNull()
+        after = Fs.readFileSync(Path.join(YAML_fixtures_after_dir, "basic.text"), 'utf8')
+        expect(contents).toEqual after
+
+    it "properly converts nested_yaml", ->
+      callback = jasmine.createSpy()
+      roaster Path.join(YAML_fixtures_before_dir, "nested_yaml.md"), {isFile: true}, callback
+
+      waitsFor ->
+        callback.callCount > 0
+
+      runs ->
+        [err, contents] = callback.mostRecentCall.args
+        expect(err).toBeNull()
+        after = Fs.readFileSync(Path.join(YAML_fixtures_after_dir, "nested_yaml.text"), 'utf8')
+        expect(contents).toEqual after
+
+    it "properly converts no_yaml", ->
+      callback = jasmine.createSpy()
+      roaster Path.join(YAML_fixtures_before_dir, "no_yaml.md"), {isFile: true}, callback
+
+      waitsFor ->
+        callback.callCount > 0
+
+      runs ->
+        [err, contents] = callback.mostRecentCall.args
+        expect(err).toBeNull()
+        after = Fs.readFileSync(Path.join(YAML_fixtures_after_dir, "no_yaml.text"), 'utf8')
+        expect(contents).toEqual after
+
+    it "properly converts not_really_yaml", ->
+      callback = jasmine.createSpy()
+      roaster Path.join(YAML_fixtures_before_dir, "not_really_yaml.md"), {isFile: true}, callback
+
+      waitsFor ->
+        callback.callCount > 0
+
+      runs ->
+        [err, contents] = callback.mostRecentCall.args
+        expect(err).toBeNull()
+        after = Fs.readFileSync(Path.join(YAML_fixtures_after_dir, "not_really_yaml.text"), 'utf8')
+        expect(contents).toEqual after
+
+    it "properly converts parse_error", ->
+      callback = jasmine.createSpy()
+      roaster Path.join(YAML_fixtures_before_dir, "parse_error.md"), {isFile: true}, callback
+
+      waitsFor ->
+        callback.callCount > 0
+
+      runs ->
+        [err, contents] = callback.mostRecentCall.args
+        expect(err).toBeNull()
+        after = Fs.readFileSync(Path.join(YAML_fixtures_after_dir, "parse_error.text"), 'utf8')
+        expect(contents).toEqual after
+
+    it "properly converts symbol_data", ->
+      callback = jasmine.createSpy()
+      roaster Path.join(YAML_fixtures_before_dir, "symbol_data.md"), {isFile: true}, callback
+
+      waitsFor ->
+        callback.callCount > 0
+
+      runs ->
+        [err, contents] = callback.mostRecentCall.args
+        expect(err).toBeNull()
+        after = Fs.readFileSync(Path.join(YAML_fixtures_after_dir, "symbol_data.text"), 'utf8')
         expect(contents).toEqual after
 
   describe "emoji", ->
