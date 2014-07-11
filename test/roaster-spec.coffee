@@ -4,6 +4,8 @@ Fs = require 'fs'
 cheerio = require 'cheerio'
 
 fixtures_dir = Path.join(__dirname, "fixtures")
+YAML_fixtures_before_dir = Path.join(fixtures_dir, "yaml", "before")
+YAML_fixtures_after_dir = Path.join(fixtures_dir, "yaml", "after")
 
 describe "roaster", ->
 
@@ -26,6 +28,20 @@ describe "roaster", ->
         roaster contents, (err, contents) ->
           expect(err).toBeNull()
           expect(contents).toContain '<code class="lang-bash">'
+
+  describe "yaml frontmatter", ->
+    fit "properly converts array_data", ->
+      callback = jasmine.createSpy()
+      roaster Path.join(YAML_fixtures_before_dir, "array_data.md"), {isFile: true}, callback
+
+      waitsFor ->
+        callback.callCount > 0
+
+      runs ->
+        [err, contents] = callback.mostRecentCall.args
+        expect(err).toBeNull()
+        after = Fs.readFileSync(Path.join(YAML_fixtures_after_dir, "array_data.text"), 'utf8')
+        expect(contents).toEqual after
 
   describe "emoji", ->
     it "returns emoji it knows", ->
@@ -100,6 +116,7 @@ describe "roaster", ->
 
         expect(err).toBeNull()
         expect(contents).toEqual '<pre><code class="lang-ruby">not :trollface:\n</code></pre>\n<p>wow <code>that is nice :smiley:</code></p>\n<p><code>:laughing:</code></p>\n<p><code>:lipstick:</code></p>\n<pre><code>:laughing:\n</code></pre><pre><code>:lipstick:\n</code></pre>'
+
   # describe "headers", ->
   #   [toc, result, resultShort] = []
 
