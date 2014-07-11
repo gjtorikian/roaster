@@ -1,0 +1,26 @@
+<table data-table-type="yaml-metadata">
+  <thead>
+  <tr>
+  <th>layout</th>
+
+  <th>title</th>
+
+  <th>description</th>
+
+  <th>eventdate</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><div>bare</div></td>
+
+  <td><div>San Francisco Java Users Group - Guts of Git</div></td>
+
+  <td><div>San Francisco Java Users Group presentation notes</div></td>
+
+  <td><div>2012-09-11 GMT-0700</div></td>
+  </tr>
+  </tbody>
+</table>
+
+<p>Well hello there!</p>

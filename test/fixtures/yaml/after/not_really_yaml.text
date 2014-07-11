@@ -1,0 +1,39 @@
+<hr>
+<h1 id="conferences-and-projects">Conferences and Projects</h1>
+<ul>
+<li><p><strong>Speaker at JSFoo, India&#39;s biggest JavaScript Conference, 2013</strong></p>
+<ul>
+<li>One of <strong>20</strong> speakers (including <strong>5 international speakers</strong>) and the <strong>only student</strong> selected to talk at <strong>JSFoo 2013</strong></li>
+<li>Talked on control of <strong>motors</strong> and <strong>servos</strong> using the <strong>HTML5 Audio API</strong>, <strong>Socket.io</strong> and a <strong>headphone jack</strong></li>
+<li>Links to the video of the talk and the code at &lt; insert url &gt;</li>
+</ul>
+</li>
+<li><p><strong>Fantasy League for Euro 2012 football tournament</strong></p>
+<ul>
+<li>Coded and ran a fantasy league for Euro 2012 with over <strong>400</strong> participants</li>
+<li>Derived performance metrics for scoring using regression over a lot of past game data.</li>
+<li>Featured in the <strong>Bangalore Mirror</strong>; Screenshot at &lt; insert link &gt;</li>
+<li>App used <strong>Google AppEngine</strong> for the backend and the datastore. Frontend built upon <strong>jQuery</strong> and <strong>Backbone</strong>.</li>
+</ul>
+</li>
+<li><p><strong>Android App for Mobile Taxi startup</strong></p>
+<ul>
+<li>Coded for <strong>TaxiShout</strong>, a startup in Bangalore.</li>
+<li>App involved using location data and a cloud database platform provided by Parse.com</li>
+</ul>
+</li>
+<li><p><strong>Icarus</strong></p>
+<ul>
+<li><strong>JavaScript framework</strong> extending the state variable in Twitter&#39;s Flight framework to a full fledged model using Laces.js</li>
+<li><strong>Open sourced</strong> on GitHub at <a href="https://github.com/ameyakarve/Icarus">https://github.com/ameyakarve/Icarus</a></li>
+</ul>
+</li>
+<li><p><strong>Open Source contributions</strong> to Twitter&#39;s <strong>typeaheadJS</strong>, AirBnB&#39;s <strong>Rendr</strong>, <strong>TodoMVC</strong> and <strong>Route66</strong> by Guille Paz.</p>
+</li>
+<li>VB Project</li>
+<li>DDP</li>
+<li>Aquaped</li>
+<li>PD Lab 3</li>
+<li>PD Lab 2</li>
+</ul>
+<hr>
