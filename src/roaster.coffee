@@ -2,6 +2,7 @@
 
 Fs = require 'fs'
 Path = require 'path'
+_ = require 'underscore'
 marked = require 'marked'
 emoji = require 'emoji-images'
 taskLists = require 'task-lists'
