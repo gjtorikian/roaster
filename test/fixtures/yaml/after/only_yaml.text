@@ -1,0 +1,13 @@
+<table data-table-type="yaml-metadata">
+  <thead>
+  <tr>
+  <th>a</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><div>b</div></td>
+  </tr>
+  </tbody>
+</table>
+

@@ -134,6 +134,19 @@ describe "roaster", ->
         after = Fs.readFileSync(Path.join(YAML_fixtures_after_dir, "symbol_data.text"), 'utf8')
         expect(contents).toEqual after
 
+    it "property converts just front-matter with no other content", ->
+      callback = jasmine.createSpy()
+      roaster Path.join(YAML_fixtures_before_dir, "only_yaml.md"), {isFile: true}, callback
+
+      waitsFor ->
+        callback.callCount > 0
+
+      runs ->
+        [err, contents] = callback.mostRecentCall.args
+        expect(err).toBeNull()
+        after = Fs.readFileSync(Path.join(YAML_fixtures_after_dir, "only_yaml.text"), 'utf8')
+        expect(contents).toEqual after
+
   describe "emoji", ->
     it "returns emoji it knows", ->
       callback = jasmine.createSpy()

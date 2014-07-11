@@ -52,7 +52,7 @@ module.exports = (content) =>
 
   try
     if items = content.match /^(-{3}(?:\n|\r)([\w\W]+?)-{3})?([\w\W]*)*/
-      body = items[3]
+      body = items[3] ? ''
 
       data = YAML.load(items[2])
 
