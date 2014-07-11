@@ -27,7 +27,7 @@
     "grunt-release": "~0.6.0",
     "grunt-shell": "~0.2.1",
     "grunt-cli": "~0.1.6",
-    "jasmine-focused": "~0.15.0"
+    "jasmine-focused": "~1.0.5"
   },
   "scripts": {
     "prepublish": "grunt coffee lint",
