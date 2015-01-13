@@ -4,6 +4,8 @@ Fs = require 'fs'
 cheerio = require 'cheerio'
 
 fixtures_dir = Path.join(__dirname, "fixtures")
+fixtures_before_dir = Path.join(fixtures_dir, "before")
+fixtures_after_dir = Path.join(fixtures_dir, "after")
 YAML_fixtures_before_dir = Path.join(fixtures_dir, "yaml", "before")
 YAML_fixtures_after_dir = Path.join(fixtures_dir, "yaml", "after")
 
@@ -13,7 +15,7 @@ describe "roaster", ->
     describe "passing options.isFile = true", ->
       it "returns a rendered file", ->
         callback = jasmine.createSpy()
-        roaster Path.join(fixtures_dir, "markdown.md"), {isFile: true}, callback
+        roaster Path.join(fixtures_before_dir, "markdown.md"), {isFile: true}, callback
 
         waitsFor ->
           callback.callCount > 0
@@ -24,7 +26,7 @@ describe "roaster", ->
           expect(contents).toContain '<code class="lang-bash">'
     describe "not passing options.isFile", ->
       it "returns a rendered file", ->
-        contents = Fs.readFileSync(Path.join(fixtures_dir, "markdown.md"), {encoding: "utf8"})
+        contents = Fs.readFileSync(Path.join(fixtures_before_dir, "markdown.md"), {encoding: "utf8"})
         roaster contents, (err, contents) ->
           expect(err).toBeNull()
           expect(contents).toContain '<code class="lang-bash">'
@@ -150,7 +152,7 @@ describe "roaster", ->
   describe "emoji", ->
     it "returns emoji it knows", ->
       callback = jasmine.createSpy()
-      roaster Path.join(fixtures_dir, "emoji.md"), {isFile: true}, callback
+      roaster Path.join(fixtures_before_dir, "emoji.md"), {isFile: true}, callback
 
       waitsFor ->
         callback.callCount > 0
@@ -178,7 +180,7 @@ describe "roaster", ->
         expect($('p img[title=":smiley:"]').attr("src")).toMatch /.*smiley\.png$/
     it "can sanitize and return", ->
       callback = jasmine.createSpy()
-      roaster Path.join(fixtures_dir, "emoji.md"), {isFile: true, sanitize:true}, callback
+      roaster Path.join(fixtures_before_dir, "emoji.md"), {isFile: true, sanitize:true}, callback
 
       waitsFor ->
         callback.callCount > 0
@@ -210,7 +212,7 @@ describe "roaster", ->
         expect(contents).toEqual '<p>:lala:</p>\n'
     it "does not mess up coded emoji", ->
       callback = jasmine.createSpy()
-      roaster Path.join(fixtures_dir, "emoji_bad.md"), {isFile: true}, callback
+      roaster Path.join(fixtures_before_dir, "emoji_bad.md"), {isFile: true}, callback
 
       waitsFor ->
         callback.callCount > 0
@@ -225,9 +227,9 @@ describe "roaster", ->
   #   [toc, result, resultShort] = []
 
   #   beforeEach ->
-  #     toc = Fs.readFileSync(Path.join(fixtures_dir, "toc.md"), {encoding: "utf8"})
-  #     result = Fs.readFileSync(Path.join(fixtures_dir, "toc_normal_result.html"), {encoding: "utf8"})
-  #     resultShort = Fs.readFileSync(Path.join(fixtures_dir, "toc_short_result.html"), {encoding: "utf8"})
+  #     toc = Fs.readFileSync(Path.join(fixtures_before_dir, "toc.md"), {encoding: "utf8"})
+  #     result = Fs.readFileSync(Path.join(fixtures_after_dir, "toc_normal_result.html"), {encoding: "utf8"})
+  #     resultShort = Fs.readFileSync(Path.join(fixtures_after_dir, "toc_short_result.html"), {encoding: "utf8"})
 
   #   it "adds anchors to all headings", ->
   #     roaster toc, (err, contents) ->
