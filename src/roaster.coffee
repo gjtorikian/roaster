@@ -8,6 +8,7 @@ emoji = require 'emoji-images'
 taskLists = require 'task-lists'
 cheerio = require 'cheerio'
 convert_frontmatter = require './convert_frontmatter'
+mermaid_wrapper = require './mermaid_wrapper'
 
 emojiFolder = Path.join(Path.dirname( require.resolve('emoji-images') ), "pngs")
 
@@ -16,6 +17,8 @@ module.exports = (file, opts, callback) ->
     isFile: false
     header: '<h<%= level %>><a name="<%= anchor %>" class="anchor" href="#<%= anchor %>"><span class="octicon octicon-link"></span></a><%= header %></h<%= level %>>'
     anchorMin: 1
+    mermaidPath: 'mermaid.full.min.js'
+  options.renderer = mermaid_wrapper(options)
 
   conversion = (data) ->
     # convert frontmatter

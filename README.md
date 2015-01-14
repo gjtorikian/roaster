@@ -23,8 +23,11 @@ If you pass `options.isFile`, the first parameter is assumed to be a file path.
 By default, this is `false`, which means that the first parameter is an
 actual string of Markdown.
 
+`options.mermaidPath` will be used to load the mermaid script. Defaults to *mermaid.full.min.js*.
+
 ## Libraries used
 
 * [marked](https://github.com/chjj/marked) for Markdown conversion
 * [emoji-images](https://github.com/henrikjoreteg/emoji-images.js) for emoji conversion
 * [task-lists](https://github.com/gjtorikian/task-lists-js) for GFM style task lists conversion
+* [mermaid](https://github.com/knsv/mermaid) for flowcharts and sequence diagrams
