@@ -223,6 +223,46 @@ describe "roaster", ->
         expect(err).toBeNull()
         expect(contents).toEqual '<pre><code class="lang-ruby">not :trollface:\n</code></pre>\n<p>wow <code>that is nice :smiley:</code></p>\n<p><code>:laughing:</code></p>\n<p><code>:lipstick:</code></p>\n<pre><code>:laughing:\n</code></pre><pre><code>:lipstick:\n</code></pre>'
 
+  describe "mermaid charts", ->
+    it "properly converts basic", ->
+      callback = jasmine.createSpy()
+      roaster Path.join(fixtures_before_dir, "mermaid_basic.md"), {isFile: true}, callback
+
+      waitsFor ->
+        callback.callCount > 0
+
+      runs ->
+        [err, contents] = callback.mostRecentCall.args
+        expect(err).toBeNull()
+        after = Fs.readFileSync(Path.join(fixtures_after_dir, "mermaid_basic.html"), 'utf8')
+        expect(contents).toEqual after
+
+    it "properly converts if other markup also included", ->
+      callback = jasmine.createSpy()
+      roaster Path.join(fixtures_before_dir, "mermaid_with_markdown.md"), {isFile: true}, callback
+
+      waitsFor ->
+        callback.callCount > 0
+
+      runs ->
+        [err, contents] = callback.mostRecentCall.args
+        expect(err).toBeNull()
+        after = Fs.readFileSync(Path.join(fixtures_after_dir, "mermaid_with_markdown.html"), 'utf8')
+        expect(contents).toEqual after
+
+    it "properly converts if custom mermaid path specified", ->
+      callback = jasmine.createSpy()
+      roaster Path.join(fixtures_before_dir, "mermaid_basic.md"), {isFile: true, mermaidPath: "lib/mermaid.full.min.js"}, callback
+
+      waitsFor ->
+        callback.callCount > 0
+
+      runs ->
+        [err, contents] = callback.mostRecentCall.args
+        expect(err).toBeNull()
+        after = Fs.readFileSync(Path.join(fixtures_after_dir, "mermaid_with_custom_path.html"), 'utf8')
+        expect(contents).toEqual after
+
   # describe "headers", ->
   #   [toc, result, resultShort] = []
 
