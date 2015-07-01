@@ -16,6 +16,8 @@ module.exports = (file, opts, callback) ->
     isFile: false
     header: '<h<%= level %>><a name="<%= anchor %>" class="anchor" href="#<%= anchor %>"><span class="octicon octicon-link"></span></a><%= header %></h<%= level %>>'
     anchorMin: 1
+    tasklist:
+      disabled: false
 
   conversion = (data) ->
     # convert frontmatter
@@ -34,7 +36,7 @@ module.exports = (file, opts, callback) ->
       $(this).replaceWith $(this).attr('title')
 
     # turn - [ ] in HTML to tasklists
-    contents = taskLists($.html())
+    contents = taskLists($.html(), options.tasklist)
 
     unless _.isNull frontmatter
       return "#{frontmatter}\n\n#{contents}"

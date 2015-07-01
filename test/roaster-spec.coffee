@@ -28,6 +28,17 @@ describe "roaster", ->
         roaster contents, (err, contents) ->
           expect(err).toBeNull()
           expect(contents).toContain '<code class="lang-bash">'
+    describe "passing options.tasklist", ->
+      it "uses the defaults when not supplied", ->
+        contents = Fs.readFileSync(Path.join(fixtures_dir, "markdown.md"), {encoding: "utf8"})
+        roaster contents, (err, contents) ->
+          expect(err).toBeNull()
+          expect(contents).toNotContain 'disabled'
+      it "passes the options along to task-list", ->
+        contents = Fs.readFileSync(Path.join(fixtures_dir, "markdown.md"), {encoding: "utf8"})
+        roaster contents, { tasklist: { disabled: true } }, (err, contents) ->
+          expect(err).toBeNull()
+          expect(contents).toContain 'disabled'
 
   describe "yaml frontmatter", ->
     it "properly converts array_data", ->
